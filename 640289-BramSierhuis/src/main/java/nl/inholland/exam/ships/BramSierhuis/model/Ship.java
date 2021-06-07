@@ -1,22 +1,31 @@
 package nl.inholland.exam.ships.BramSierhuis.model;
 
-import lombok.Data;
+import lombok.*;
+import nl.inholland.exam.ships.BramSierhuis.model.dto.ShipDTO;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Ship {
     @Id
     @GeneratedValue
     private long id;
     private String name;
-
-    private Manufacturer manufacturer;
-
+    private long manufacturerId;
     private String type;
     private double length;
     private long cost;
+
+    //Convert a shipDTO to a ship object
+    public Ship (ShipDTO shipDTO){
+        this.name = shipDTO.getName();
+        this.manufacturerId = shipDTO.getManufacturerId();
+        this.type = shipDTO.getType();
+        this.length = shipDTO.getLength();
+        this.cost = shipDTO.getCost();
+    }
 }

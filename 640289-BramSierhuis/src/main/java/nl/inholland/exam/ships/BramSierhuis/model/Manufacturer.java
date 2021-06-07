@@ -1,18 +1,24 @@
 package nl.inholland.exam.ships.BramSierhuis.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.OneToMany;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data //TODO: Validate
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Manufacturer {
     @Id
     private long id;
-    String name;
-    String affiliation;
-    String ceo;
-    List<Ship> ships;
+    private String name;
+    private String affiliation;
+    private String ceo;
+
+    @OneToMany(mappedBy = "manufacturerId")
+    Set<Ship> ships = new HashSet<>();
 }
